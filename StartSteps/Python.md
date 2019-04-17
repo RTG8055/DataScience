@@ -9,38 +9,31 @@
 
 ### To be used code
 
-'''
-	plt.figure(figsize= (14,8))
-	# cmap = cmap=sns.diverging_palette(5, 250, as_cmap=True)
-	cmap = sns.diverging_palette(250, 10, as_cmap=True)
+#### Correlation Plots
+
+
+   	plt.figure(figsize= (14,8))
+   	# cmap = cmap=sns.diverging_palette(5, 250, as_cmap=True)
+   	cmap = sns.diverging_palette(250, 10, as_cmap=True)
 	ax = sns.heatmap(train.corr(),center = 0,annot= True,linewidth=0.5,cmap= cmap)
-'''
 
 
-'''
-corr = train.corr()
-plt.figure(figsize=(14,8))
-mask = np.zeros_like(corr)
-mask[np.triu_indices_from(mask)] = True
-with sns.axes_style("white"):
-    ax = sns.heatmap(corr, mask=mask, vmax=.3, square=True,cmap=cmap,center = 0)
-'''
 
-'''
-def convert_to_boolean(x):
-    if(x==1):
-        return True
-    else:
-        return False
-'''
+	corr = train.corr()
+	plt.figure(figsize=(14,8))
+	mask = np.zeros_like(corr)
+	mask[np.triu_indices_from(mask)] = True
+	with sns.axes_style("white"):
+	    ax = sns.heatmap(corr, mask=mask, vmax=.3, square=True,cmap=cmap,center = 0)
 
-'''
-for col in categorical_columns: train[col] = train[col].astype('category')
-for col in boolean_columns: train[col] = train[col].apply(convert_to_boolean).astype(bool);test[col] = test[col].apply(convert_to_boolean).astype(bool)
-for col in numeric_columns:
-    df[col] = df[col].astype('float64')
 
-'''
+
+	for col in categorical_columns: train[col] = train[col].astype('category')
+	for col in boolean_columns: train[col] = train[col].apply(convert_to_boolean).astype(bool);test[col] = test[col].apply(convert_to_boolean).astype(bool)
+	for col in numeric_columns:
+	    df[col] = df[col].astype('float64')
+
+
 
 '''
 df.isnull().sum()
