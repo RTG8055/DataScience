@@ -10,10 +10,10 @@
 ### To be used code
 
 '''
-plt.figure(figsize= (14,8))
-# cmap = cmap=sns.diverging_palette(5, 250, as_cmap=True)
-cmap = sns.diverging_palette(250, 10, as_cmap=True)
-ax = sns.heatmap(train.corr(),center = 0,annot= True,linewidth=0.5,cmap= cmap)
+	plt.figure(figsize= (14,8))
+	# cmap = cmap=sns.diverging_palette(5, 250, as_cmap=True)
+	cmap = sns.diverging_palette(250, 10, as_cmap=True)
+	ax = sns.heatmap(train.corr(),center = 0,annot= True,linewidth=0.5,cmap= cmap)
 '''
 
 
