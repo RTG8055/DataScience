@@ -12,3 +12,5 @@
  - one hot encoding
 
 http://www.willmcginnis.com/2015/11/29/beyond-one-hot-an-exploration-of-categorical-variables/
+
+https://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
