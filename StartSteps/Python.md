@@ -71,6 +71,7 @@
 	 
 
 #### Visualizations
+https://wellsr.com/python/seaborn-barplot-tutorial-for-python/#:~:text=If%20you%20want%20to%20display,have%20to%20do%20work%20around.&text=You%20can%20see%20that%20the,be%20stored%20in%20a%20variable.
 
 	for col in categorical_columns:
 	    val = lms[col].value_counts(dropna=False)
