@@ -10,6 +10,11 @@
  - Binning
    - replce an exact numerical value with a more broad category
  - one hot encoding
+ - Date column example
+   - compute day of the week
+   - weekend or not
+   - national holiday or not
+   
 
 http://www.willmcginnis.com/2015/11/29/beyond-one-hot-an-exploration-of-categorical-variables/
 
