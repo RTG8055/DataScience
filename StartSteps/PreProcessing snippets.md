@@ -1,4 +1,4 @@
-###Convert to Date
+### Convert to Date
  - today = datetime.datetime(2017, 10, 20)
  - datetime.strptime(date_string, format)
  - train['cnv_date'] = pd.to_datetime(train.DATE)
