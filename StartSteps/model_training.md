@@ -176,3 +176,14 @@ eval_metric = 'mlogloss',
 
 clf=modelfit(xgb1, train, predictors)
 '''
+
+
+## Submisstion file
+
+          def make_submission(prediction, sub_name):
+              my_submission = pd.DataFrame({'reservation_id':test_binary[index],'amount_spent_per_room_night_scaled':prediction})
+              my_submission.to_csv('{}.csv'.format(sub_name),index=False)
+              print('A submission file has been made')
+          predictions = NN_model.predict(features_actual_scaled)
+
+make_submission(predictions[:,0],'submission_NL6.csv')
