@@ -1,10 +1,10 @@
-from sklearn.feature_extraction import FeatureHasher
+    from sklearn.feature_extraction import FeatureHasher
 
-fh = FeatureHasher(n_features=6, input_type='string')
-hashed_features = fh.fit_transform(vg_df['Genre'])
-hashed_features = hashed_features.toarray()
-pd.concat([vg_df[['Name', 'Genre']], pd.DataFrame(hashed_features)], 
-          axis=1).iloc[1:7]																																																	
+    fh = FeatureHasher(n_features=6, input_type='string')
+    hashed_features = fh.fit_transform(vg_df['Genre'])
+    hashed_features = hashed_features.toarray()
+    pd.concat([vg_df[['Name', 'Genre']], pd.DataFrame(hashed_features)], 
+              axis=1).iloc[1:7]																																																	
 
     for column in categorical_columns:
         test[column] = test[column].astype('category')
@@ -25,64 +25,65 @@ pd.concat([vg_df[['Name', 'Genre']], pd.DataFrame(hashed_features)],
 
 --
 
-'''
-#one hot encoding for categorical variables
-data_new = pd.get_dummies(data=data_new,columns=obj_dtypes)
+    '''
+    #one hot encoding for categorical variables
+    data_new = pd.get_dummies(data=data_new,columns=obj_dtypes)
 
 '''
 
 '''
 # Up-sample Minority Class
-from sklearn.utils import resample
+    from sklearn.utils import resample
 
-#separating majority and minority classes
-df_majority = train[train["TARGET"] == 0]
-df_minority = train[train["TARGET"] == 1]
+    #separating majority and minority classes
+    df_majority = train[train["TARGET"] == 0]
+    df_minority = train[train["TARGET"] == 1]
 
-#upsample minority data
-df_minority_upsampled = resample(df_minority,
-                                 replace=True,
-                                 n_samples =197969,
-                                 random_state=123)
+    #upsample minority data
+    df_minority_upsampled = resample(df_minority,
+                                     replace=True,
+                                     n_samples =197969,
+                                     random_state=123)
 
-df_upsampled = pd.concat([df_majority,df_minority_upsampled],axis=0)
+    df_upsampled = pd.concat([df_majority,df_minority_upsampled],axis=0)
 
-#splitting dependent and independent variables
-df_upsampled_X = df_upsampled[[i for i in df_upsampled.columns if i not in ['SK_ID_CURR'] + [ 'TARGET']]]
-df_upsampled_Y = df_upsampled[["TARGET"]]
+    #splitting dependent and independent variables
+    df_upsampled_X = df_upsampled[[i for i in df_upsampled.columns if i not in ['SK_ID_CURR'] + [ 'TARGET']]]
+    df_upsampled_Y = df_upsampled[["TARGET"]]
 '''
 
 '''
 # Down-sample Majority Class
-from sklearn.utils import resample
+    from sklearn.utils import resample
 
-#separating majority and minority classes
-df_majority = train_hashed[train_hashed[target] == 0]
-df_minority = train_hashed[train_hashed[target] == 1]
+    #separating majority and minority classes
+    df_majority = train_hashed[train_hashed[target] == 0]
+    df_minority = train_hashed[train_hashed[target] == 1]
 
-df_majority_downsampled = resample(df_majority,
-                                   replace=False,
-                                   n_samples=17288,
-                                   random_state=123)
+    df_majority_downsampled = resample(df_majority,
+                                       replace=False,
+                                       n_samples=17288,
+                                       random_state=123)
 
-df_downsampled = pd.concat([df_minority,df_majority_downsampled],axis=0)
+    df_downsampled = pd.concat([df_minority,df_majority_downsampled],axis=0)
 
-#splitting dependent and independent variables
+    #splitting dependent and independent variables
 
-df_downsampled_X = df_downsampled[[i for i in df_downsampled.columns if i not in ['SK_ID_CURR'] + [ 'TARGET']]]
-df_downsampled_Y = df_downsampled[[target]]
+    df_downsampled_X = df_downsampled[[i for i in df_downsampled.columns if i not in ['SK_ID_CURR'] + [ 'TARGET']]]
+    df_downsampled_Y = df_downsampled[[target]]
 '''
 
 
 ### Box-Cox Transform
 '''
-from scipy.stats import boxcox
-numerical = df_LC.columns[df_LC.dtypes == 'float64']
-for i in numerical:
-    if df_LC[i].min() > 0:
-        transformed, lamb = boxcox(df_LC.loc[df[i].notnull(), i])
-        if np.abs(1 - lamb) > 0.02:
-            df_LC.loc[df[i].notnull(), i] = transformed
+
+    from scipy.stats import boxcox
+    numerical = df_LC.columns[df_LC.dtypes == 'float64']
+    for i in numerical:
+        if df_LC[i].min() > 0:
+            transformed, lamb = boxcox(df_LC.loc[df[i].notnull(), i])
+            if np.abs(1 - lamb) > 0.02:
+                df_LC.loc[df[i].notnull(), i] = transformed
 '''
 
 '''
