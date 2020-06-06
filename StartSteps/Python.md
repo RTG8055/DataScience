@@ -169,17 +169,15 @@ https://wellsr.com/python/seaborn-barplot-tutorial-for-python/#:~:text=If%20you%
 	for col in categorical_columns:
 		plt.figure(figsize=(16,8))
 		plt.subplot(121)
-		train[train[target]==0][col].value_counts().plot.pie(fontsize=9,autopct = "%1.0f%%",
-																										 colors = sns.color_palette("Set1"),
-													  wedgeprops={"linewidth":2,"edgecolor":"white"},shadow =True)
+		train[train[target]==0][col].value_counts().plot.pie(fontsize=9,autopct = "%1.0f%%",colors = sns.color_palette("Set1"),
+		wedgeprops={"linewidth":2,"edgecolor":"white"},shadow =True)
 		circ = plt.Circle((0,0),.7,color="white")
 		plt.gca().add_artist(circ)
 		plt.title("Distribution of "+col+" type for target==0",color="b")
 
 		plt.subplot(122)
-		train[train[target]==1][col].value_counts().plot.pie(fontsize=9,autopct = "%1.0f%%",
-																										 colors = sns.color_palette("Set1"),
-													  wedgeprops={"linewidth":2,"edgecolor":"white"},shadow =True)
+		train[train[target]==1][col].value_counts().plot.pie(fontsize=9,autopct = "%1.0f%%", colors = sns.color_palette("Set1"),
+		wedgeprops={"linewidth":2,"edgecolor":"white"},shadow =True)
 		circ = plt.Circle((0,0),.7,color="white")
 		plt.gca().add_artist(circ)
 		plt.title("Distribution of "+col+" type for target==1",color="b")
