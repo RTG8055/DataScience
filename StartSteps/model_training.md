@@ -129,14 +129,15 @@ https://medium.com/@hjhuney/implementing-a-random-forest-classification-model-in
     print("Mean AUC Score - Random Forest: ", rfc_cv_score.mean())
 ### XGBoost
 '''
-def modelfit(alg, dtrain, predictors,useTrainCV=True, cv_folds=5, early_stopping_rounds=50):
-    from sklearn import metrics
-    if useTrainCV:
-        xgb_param = alg.get_xgb_params()
-        xgtrain = xgb.DMatrix(dtrain[predictors].values, label=dtrain[target].values)
-        cvresult = xgb.cv(xgb_param, xgtrain, num_boost_round=alg.get_params()['n_estimators'], nfold=cv_folds,
-            metrics='mlogloss', early_stopping_rounds=early_stopping_rounds)
-        alg.set_params(n_estimators=cvresult.shape[0])
+
+    def modelfit(alg, dtrain, predictors,useTrainCV=True, cv_folds=5, early_stopping_rounds=50):
+        from sklearn import metrics
+        if useTrainCV:
+            xgb_param = alg.get_xgb_params()
+            xgtrain = xgb.DMatrix(dtrain[predictors].values, label=dtrain[target].values)
+            cvresult = xgb.cv(xgb_param, xgtrain, num_boost_round=alg.get_params()['n_estimators'], nfold=cv_folds,
+                metrics='mlogloss', early_stopping_rounds=early_stopping_rounds)
+            alg.set_params(n_estimators=cvresult.shape[0])
     
     #Fit the algorithm on the data
     alg.fit(dtrain[predictors], dtrain[target],eval_metric='auc')
@@ -155,27 +156,25 @@ def modelfit(alg, dtrain, predictors,useTrainCV=True, cv_folds=5, early_stopping
     return alg
 '''
 
-'''
-target = 'price_range'
-IDcol = 'id'
-predictors = [x for x in train.columns if x not in [target, IDcol]]
-xgb1 = XGBClassifier(
- learning_rate =0.1,
- n_estimators=1000,
- max_depth=5,
- min_child_weight=1,
- gamma=0,
- subsample=0.8,
- colsample_bytree=0.8,
- objective= 'multi:softmax',
- num_class = 4,
- nthread=4,
- scale_pos_weight=1,
-eval_metric = 'mlogloss',
- seed=27)
+    target = 'price_range'
+    IDcol = 'id'
+    predictors = [x for x in train.columns if x not in [target, IDcol]]
+    xgb1 = XGBClassifier(
+     learning_rate =0.1,
+     n_estimators=1000,
+     max_depth=5,
+     min_child_weight=1,
+     gamma=0,
+     subsample=0.8,
+     colsample_bytree=0.8,
+     objective= 'multi:softmax',
+     num_class = 4,
+     nthread=4,
+     scale_pos_weight=1,
+    eval_metric = 'mlogloss',
+     seed=27)
 
-clf=modelfit(xgb1, train, predictors)
-'''
+    clf=modelfit(xgb1, train, predictors)
 
 
 ## Submisstion file
