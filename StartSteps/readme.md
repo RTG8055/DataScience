@@ -6,6 +6,6 @@
  - __model_training.md__ : code snippets to be used before/ while model trainging depending on the circumstances
 
 
-## Kaggle Repositories
+## Kaggle Kernels
 
  - https://www.kaggle.com/klaudiajankowska/binary-classification-multiple-method-comparison
