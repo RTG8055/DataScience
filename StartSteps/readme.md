@@ -9,3 +9,6 @@
 ## Kaggle Kernels
 
  - https://www.kaggle.com/klaudiajankowska/binary-classification-multiple-method-comparison
+ 
+## HyperParameter Tuning
+ - https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
