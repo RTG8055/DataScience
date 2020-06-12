@@ -1,79 +1,3 @@
-    from sklearn.feature_extraction import FeatureHasher
-
-    fh = FeatureHasher(n_features=6, input_type='string')
-    hashed_features = fh.fit_transform(vg_df['Genre'])
-    hashed_features = hashed_features.toarray()
-    pd.concat([vg_df[['Name', 'Genre']], pd.DataFrame(hashed_features)], 
-              axis=1).iloc[1:7]																																																	
-
-    for column in categorical_columns:
-        test[column] = test[column].astype('category')
---
-
-    for col in numeric_columns:
-        test[col] = test[col].astype('float64')
---
-
-    for col in date_columns:
-        test[col] = pd.to_datetime(test[col])
-        test[col] = test[col].apply(pd.datetime.toordinal)
---
-
-    train_cols = list(train.columns)
-    train_cols.remove('FORECLOSURE')
-    train_cols = [col for col in train_cols if col not in indexes]
-
---
-
-    '''
-    #one hot encoding for categorical variables
-    data_new = pd.get_dummies(data=data_new,columns=obj_dtypes)
-
-'''
-
-'''
-# Up-sample Minority Class
-    from sklearn.utils import resample
-
-    #separating majority and minority classes
-    df_majority = train[train["TARGET"] == 0]
-    df_minority = train[train["TARGET"] == 1]
-
-    #upsample minority data
-    df_minority_upsampled = resample(df_minority,
-                                     replace=True,
-                                     n_samples =197969,
-                                     random_state=123)
-
-    df_upsampled = pd.concat([df_majority,df_minority_upsampled],axis=0)
-
-    #splitting dependent and independent variables
-    df_upsampled_X = df_upsampled[[i for i in df_upsampled.columns if i not in ['SK_ID_CURR'] + [ 'TARGET']]]
-    df_upsampled_Y = df_upsampled[["TARGET"]]
-'''
-
-'''
-# Down-sample Majority Class
-    from sklearn.utils import resample
-
-    #separating majority and minority classes
-    df_majority = train_hashed[train_hashed[target] == 0]
-    df_minority = train_hashed[train_hashed[target] == 1]
-
-    df_majority_downsampled = resample(df_majority,
-                                       replace=False,
-                                       n_samples=17288,
-                                       random_state=123)
-
-    df_downsampled = pd.concat([df_minority,df_majority_downsampled],axis=0)
-
-    #splitting dependent and independent variables
-
-    df_downsampled_X = df_downsampled[[i for i in df_downsampled.columns if i not in ['SK_ID_CURR'] + [ 'TARGET']]]
-    df_downsampled_Y = df_downsampled[[target]]
-'''
-
-
 ### Box-Cox Transform
 '''
 
@@ -85,21 +9,6 @@
             if np.abs(1 - lamb) > 0.02:
                 df_LC.loc[df[i].notnull(), i] = transformed
 '''
-
-'''
-#Label encoding
-from sklearn.preprocessing import LabelEncoder
-
-le = LabelEncoder()
-
-for i in obj_dtypes:
-    data_new[i] = le.fit_transform(data_new[i])
-'''
-
-    from sklearn.model_selection import train_test_split
-    # implementing train-test-split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=66)
-
 
 ### RandomForest Classifier
 
