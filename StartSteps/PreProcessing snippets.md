@@ -74,8 +74,9 @@
 
 ---
 
-## Get Train_cols
+# Get Train dataset
 
+## Get Train Cols
     train_cols_binary = list(df_total_binary.drop(indexes,axis=1).columns)
     train_cols_dummy = list(df_total_dummy.drop(indexes,axis=1).columns)
 
@@ -86,12 +87,75 @@
 
 ---
 
+## Get Train Rows
+
+    train_rows_all = set(train['INCIDENT_ID'])
+---
+## Construct final train
+
+    train_binary = df_total_binary[df_total_binary[indexes[0]].apply(lambda x: True if (x in train_rows_all) else False)]
+    train_binary = pd.concat([train_binary,train[target]],axis=1)
+    test_binary = df_total_binary[df_total_binary[indexes[0]].apply(lambda x: False if (x in train_rows_all) else True)]
+
+---
+
 # Convert to Date
  - today = datetime.datetime(2017, 10, 20)
  - datetime.strptime(date_string, format)
  - train['cnv_date'] = pd.to_datetime(train.DATE)
  - train['day_of_week'] = train.cnv_date.apply(lambda x: x.dayofweek)
  - train['weekend_or_not'] = train.day_of_week.apply(lambda x: 1 if x==6 or x==0 else 0)
+ 
+ ---
+ 
+ # Resampling
+ 
+## Down Sampling
+
+    from sklearn.utils import resample
+
+    #separating majority and minority classes
+    df_majority_binary = train_binary[train_binary[target] == 1]
+    df_minority_binary = train_binary[train_binary[target] == 0]
+
+    df_majority_binary_downsampled = resample(df_majority_binary,
+                                       replace=False,
+                                       n_samples=1068,
+                                       random_state=66)
+
+    df_downsampled_binary = pd.concat([df_minority_binary,df_majority_binary_downsampled],axis=0)
+
+    #splitting dependent and independent variables
+
+    df_downsampled_binary_X = df_downsampled_binary[train_cols_binary]
+    df_downsampled_binary_Y = df_downsampled_binary[[target]]
+
+    print(df_downsampled_binary_X.shape)
+    print(df_downsampled_binary_Y.shape)
+---
+## Up Sampling
+
+    from sklearn.utils import resample
+
+    #separating majority and minority classes
+    df_majority_binary = train_binary[train_binary[target] == 1]
+    df_minority_binary = train_binary[train_binary[target] == 0]
+
+    df_minority_binary_upsampled = resample(df_minority_binary,
+                                       replace=True,
+                                       n_samples=22788,
+                                       random_state=66)
+
+    df_upsampled_binary = pd.concat([df_majority_binary,df_minority_binary_upsampled],axis=0)
+
+    #splitting dependent and independent variables
+
+    df_upsampled_binary_X = df_upsampled_binary[train_cols_binary]
+    df_upsampled_binary_Y = df_upsampled_binary[[target]]
+
+    print(df_upsampled_binary_X.shape)
+    print(df_upsampled_binary_Y.shape)
+ 
 
 # Biblography
 - https://www.kaggle.com/vkrahul/fork-of-hackerearth-novartis-malicious-upsampling/notebook?select=CBC_predict_dummy_up.csv
