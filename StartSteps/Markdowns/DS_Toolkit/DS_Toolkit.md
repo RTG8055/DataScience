@@ -9,7 +9,7 @@ Data Source: https://www.kaggle.com/c/house-prices-advanced-regression-technique
 
 
 ```python
-df = pd.read_csv('Datasets/housing_train.csv')
+df = pd.read_csv('../Datasets/housing_train.csv')
 ```
 
 
@@ -588,7 +588,7 @@ msno.matrix(df)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2147480ffd0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1910bef8760>
 
 
 
@@ -725,7 +725,7 @@ sns.lineplot(data=df[:100]['SalePrice'])
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2146e115760>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1910852fd30>
 
 
 
@@ -747,7 +747,7 @@ plt.legend()
 
 
 
-    <matplotlib.legend.Legend at 0x21473f10a30>
+    <matplotlib.legend.Legend at 0x1910b632f40>
 
 
 
@@ -766,7 +766,7 @@ sns.boxplot(x = df['SaleCondition'], y = df['SalePrice'])
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x21474c08640>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1910c501400>
 
 
 
@@ -831,7 +831,7 @@ sns.heatmap(df[numerical_cols].corr(), annot=False, cmap='coolwarm', fmt='.1f')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x21474846730>
+    <matplotlib.axes._subplots.AxesSubplot at 0x191101481f0>
 
 
 
@@ -854,6 +854,11 @@ ridge_plot.fig.subplots_adjust(hspace=0.35)
 
 
 # QQ Plots
+
+
+```python
+
+```
 
 
 ```python
