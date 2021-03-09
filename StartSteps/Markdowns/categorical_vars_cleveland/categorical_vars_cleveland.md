@@ -24,7 +24,7 @@ plt.ylabel('Name')
 
 
 
-![png](output_8_1.png)
+![png](single_cleveland.png)
 
 
 ## Multiple Dots
@@ -56,5 +56,5 @@ plt.ylabel('Name')
 
 
 
-![png](output_10_1.png)
+![png](mult_cleveland.png)
 

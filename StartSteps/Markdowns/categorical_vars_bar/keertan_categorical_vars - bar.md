@@ -13,7 +13,7 @@ g = sns.catplot(x="sex", y="count",
 ```
 
 
-![png](output_7_0.png)
+![png](faceted_bar.png)
 
 
 ## Basic Bar Chart
@@ -39,7 +39,7 @@ sns.barplot(x='gender', y='count', data=df_copy2)
 
 
 
-![png](output_11_1.png)
+![png](seaborn_basic.png)
 
 
 ##### matplotlib
@@ -57,7 +57,7 @@ plt.bar(x=df_copy2.gender, height=df_copy2['count'], color=['blue', 'red'])
 
 
 
-![png](output_13_1.png)
+![png](matplotlib_basic.png)
 
 
 ## Horizontal Bar charts
@@ -77,7 +77,7 @@ sns.barplot(x='count', y='gender', data=df_copy2)
 
 
 
-![png](output_15_1.png)
+![png](seaborn_horizontal.png)
 
 
 ##### matplotlib
@@ -96,7 +96,7 @@ plt.barh(y=df_copy2.gender, width=df_copy2['count'], color=['blue', 'red'])
 
 
 
-![png](output_17_1.png)
+![png](matplotlib_horizontal.png)
 
 
 ## Reordering the bars
@@ -117,7 +117,7 @@ sns.barplot(x='gender', y='count', data=df_copy2, order=['female', 'male'])
 
 
 
-![png](output_20_1.png)
+![png](seaborn_reorder_bar.png)
 
 
 ##### matplotlib
