@@ -19,7 +19,7 @@ g = sns.catplot(x="sex", y="count",
 ```
 
 
-![png]({{ site.baseurl}}/images/{{ site.baseurl}}/images/faceted_bar.png)
+![png]({{ site.baseurl}}/images/faceted_bar.png)
 
 
 ## Basic Bar Chart
