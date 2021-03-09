@@ -605,6 +605,86 @@ print('Columns with missing values in df: ', cols_with_missing)
     Columns with missing values in df:  ['LotFrontage', 'Alley', 'MasVnrType', 'MasVnrArea', 'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Electrical', 'FireplaceQu', 'GarageType', 'GarageYrBlt', 'GarageFinish', 'GarageQual', 'GarageCond', 'PoolQC', 'Fence', 'MiscFeature']
     
 
+## Handling Missing Values
+
+### 1. Omit Data
+
+We filter out columns which contain more than 90% missing values.
+
+
+```python
+nv1 = df.isnull().sum()
+nv2 = nv1.where(nv1>0).dropna()/df.shape[0]*100
+nv2.where(nv>90).dropna()
+```
+
+
+
+
+    Alley          93.767123
+    PoolQC         99.520548
+    MiscFeature    96.301370
+    dtype: float64
+
+
+
+We see here PoolQC contains 99% missing values and we decide to go ahead and drop it.
+
+
+```python
+cols_to_drop = ['PoolQC']
+
+X = df.drop(cols_to_drop, axis=1)
+
+if 'PoolQC' in X.columns:
+    print('Drop Failed')
+else:
+    print('Drop Passed')
+```
+
+    Drop Passed
+    
+
+### 2. Imputation
+
+```python
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+```
+
+```python
+# Preprocessing for numerical data
+numerical_transformer = SimpleImputer(strategy='median')
+
+# Preprocessing for categorical data
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
+```
+
+```python
+# Bundle preprocessing for numerical and categorical data
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numerical_transformer, numerical_cols),
+        ('cat', categorical_transformer, categorical_columns)
+    ])
+```
+
+Additional Notes on how to use these objects:
+
+```python
+linear_reg_pipe = Pipeline(steps=[('preprocessor', preprocessor),('regressor', LinearRegression())])
+```
+
+```python
+linear_reg_pipe.fit(X_train, y_train)
+linear_reg_preds = linear_reg_pipe.predict(X_test)
+```
+
 # Unique Values 
 
 
@@ -714,6 +794,28 @@ df[categorical_columns].nunique()
 
 # Visualizations
 
+# Histogram
+
+
+```python
+plt.figure(figsize=(12,6))
+plt.hist(df['SalePrice'])
+```
+
+
+
+
+    (array([148., 723., 373., 135.,  51.,  19.,   4.,   3.,   2.,   2.]),
+     array([ 34900., 106910., 178920., 250930., 322940., 394950., 466960.,
+            538970., 610980., 682990., 755000.]),
+     <a list of 10 Patch objects>)
+
+
+
+
+![png](output_30_1.png)
+
+
 # Line Plot 
 
 
@@ -730,7 +832,7 @@ sns.lineplot(data=df[:100]['SalePrice'])
 
 
 
-![png](output_18_1.png)
+![png](output_32_1.png)
 
 
 # Violin Plot
@@ -752,48 +854,48 @@ plt.legend()
 
 
 
-![png](output_20_1.png)
+![png](output_34_1.png)
 
 
 # Box Plot
 
+ - Horizontal
 
-```python
-plt.figure(figsize=(13,7))
-sns.boxplot(x = df['SaleCondition'], y = df['SalePrice'])
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1910c501400>
-
-
-
-
-![png](output_22_1.png)
-
-
-# Histogram
 
 
 ```python
 plt.figure(figsize=(12,6))
-plt.hist(df['SalePrice'])
+sns.boxplot(data=df, y='SaleCondition', x='SalePrice', orient='h')
 ```
 
 
 
 
-    (array([148., 723., 373., 135.,  51.,  19.,   4.,   3.,   2.,   2.]),
-     array([ 34900., 106910., 178920., 250930., 322940., 394950., 466960.,
-            538970., 610980., 682990., 755000.]),
-     <a list of 10 Patch objects>)
+    <matplotlib.axes._subplots.AxesSubplot at 0x1910dcf7250>
 
 
 
 
-![png](output_24_1.png)
+![png](output_37_1.png)
+
+
+- Vertical
+
+
+```python
+plt.figure(figsize=(12,6))
+sns.boxplot(data=df, x='SaleCondition', y='SalePrice', orient='v')
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1910dcf7070>
+
+
+
+
+![png](output_39_1.png)
 
 
 # Univariate Analysis
@@ -806,7 +908,7 @@ for i, col in enumerate(numerical_cols[0:-2]):
 ```
 
 
-![png](output_26_0.png)
+![png](output_41_0.png)
 
 
 
@@ -817,7 +919,7 @@ for i, col in enumerate(numerical_cols[36:]):
 ```
 
 
-![png](output_27_0.png)
+![png](output_42_0.png)
 
 
 # Bivariate Distribution (Heatmap)
@@ -836,7 +938,7 @@ sns.heatmap(df[numerical_cols].corr(), annot=False, cmap='coolwarm', fmt='.1f')
 
 
 
-![png](output_29_1.png)
+![png](output_44_1.png)
 
 
 # Ridge Line Plot
@@ -850,15 +952,51 @@ ridge_plot.fig.subplots_adjust(hspace=0.35)
 ```
 
 
-![png](output_31_0.png)
+![png](output_46_0.png)
 
 
-# QQ Plots
+# Scatter Plots
 
 
 ```python
-
+plt.figure(figsize=(10,5))
+sns.scatterplot(data=df.iloc[:200,:], x='YearBuilt', y='SalePrice')
+sns.lineplot([1880,2000], [0,500000])
 ```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x19110619bb0>
+
+
+
+
+![png](output_48_1.png)
+
+
+## QQ Plots
+
+
+```python
+from seaborn_qqplot import pplot
+```
+
+
+```python
+pplot(df.iloc[:250,:], x='YearBuilt', y='SalePrice', kind='qq', height=4, aspect=2)
+```
+
+
+
+
+    <seaborn.axisgrid.PairGrid at 0x191132283d0>
+
+
+
+
+![png](output_51_1.png)
+
 
 
 ```python
