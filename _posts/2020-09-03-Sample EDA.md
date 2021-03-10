@@ -1,15 +1,21 @@
 ---
 layout: post
 title: "Sample EDA"
-date: 2021-03-09 18:45:06 -0700
+date: 2021-03-09 18:45:06
 comments: false
 ---
 
 <a id='toc'></a>
 ## Contents:
+- <a href="#Columns">Columns</a>
 - <a href="#MissingVals">Missing Value Analysis</a>
+- <a href="#HandleMissingVals">Handling Missing Values</a>
+- <a href="#UniqueVals">Unique Values</a>
 - <a href="#Univariate">Univariate Analysis</a>
 - <a href="#Bivariate">Bivariate Analysis</a>
+- <a href="#WebScraping">Web Scraping</a>
+
+
 
 ```python
 import pandas as pd
@@ -18,7 +24,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 ```
 
-Data Source: https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data?select=train.csv
+Data Source: <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data?select=train.csv"></a>
 
 
 ```python
@@ -546,8 +552,9 @@ df.info()
     memory usage: 924.0+ KB
     
 
+<a id="Columns"></a>
 # Columns
-
+<a href="#toc">[Back to top]</a>
 
 ```python
 df.dtypes
@@ -601,9 +608,6 @@ msno.matrix(df)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1910bef8760>
-
-
 
 
 ![png]({{site.baseurl}}/images/MissingNo.png)
@@ -617,8 +621,9 @@ print('Columns with missing values in df: ', cols_with_missing)
 
     Columns with missing values in df:  ['LotFrontage', 'Alley', 'MasVnrType', 'MasVnrArea', 'BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'Electrical', 'FireplaceQu', 'GarageType', 'GarageYrBlt', 'GarageFinish', 'GarageQual', 'GarageCond', 'PoolQC', 'Fence', 'MiscFeature']
     
-
+<a id='HandleMissingVals'></a>
 ## Handling Missing Values
+<a href="#toc">[Back to top]</a>
 
 ### 1. Omit Data
 
@@ -698,58 +703,9 @@ linear_reg_pipe.fit(X_train, y_train)
 linear_reg_preds = linear_reg_pipe.predict(X_test)
 ```
 
+<a id='UniqueVals'></a>
 # Unique Values 
-
-
-```python
-df[numerical_cols].nunique()
-```
-
-
-
-
-    Id               1460
-    MSSubClass         15
-    LotFrontage       110
-    LotArea          1073
-    OverallQual        10
-    OverallCond         9
-    YearBuilt         112
-    YearRemodAdd       61
-    MasVnrArea        327
-    BsmtFinSF1        637
-    BsmtFinSF2        144
-    BsmtUnfSF         780
-    TotalBsmtSF       721
-    1stFlrSF          753
-    2ndFlrSF          417
-    LowQualFinSF       24
-    GrLivArea         861
-    BsmtFullBath        4
-    BsmtHalfBath        3
-    FullBath            4
-    HalfBath            3
-    BedroomAbvGr        8
-    KitchenAbvGr        4
-    TotRmsAbvGrd       12
-    Fireplaces          4
-    GarageYrBlt        97
-    GarageCars          5
-    GarageArea        441
-    WoodDeckSF        274
-    OpenPorchSF       202
-    EnclosedPorch     120
-    3SsnPorch          20
-    ScreenPorch        76
-    PoolArea            8
-    MiscVal            21
-    MoSold             12
-    YrSold              5
-    SalePrice         663
-    dtype: int64
-
-
-
+<a href="#toc">[Back to top]</a>
 
 ```python
 df[categorical_columns].nunique()
@@ -849,9 +805,9 @@ sns.heatmap(df[numerical_cols].corr(), annot=False, cmap='coolwarm', fmt='.1f')
 ![png]({{site.baseurl}}/images/BiV.png)
 
 
-
+<a id="WebScraping"></a>
 # Web Scraping
-
+<a href="#toc">[Back to top]</a>
 
 ```python
 from bs4 import BeautifulSoup
@@ -936,76 +892,4 @@ df.head()
   </tbody>
 </table>
 </div>
-
-
-
-# Spatial Data
-
-
-```python
-df_toronto = pd.read_csv('../Datasets/toronto_data.csv')
-df_toronto.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Postal Code</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>M1B</td>
-      <td>43.806686</td>
-      <td>-79.194353</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>M1C</td>
-      <td>43.784535</td>
-      <td>-79.160497</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>M1E</td>
-      <td>43.763573</td>
-      <td>-79.188711</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>M1G</td>
-      <td>43.770992</td>
-      <td>-79.216917</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>M1H</td>
-      <td>43.773136</td>
-      <td>-79.239476</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
 
