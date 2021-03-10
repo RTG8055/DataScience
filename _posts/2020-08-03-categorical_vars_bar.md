@@ -105,11 +105,6 @@ plt.ylabel('Count')
 
 
 
-    Text(0, 0.5, 'Count')
-
-
-
-
 ![png]({{ site.baseurl}}/images/matplotlib_horizontal.png)
 
 
