@@ -120,9 +120,3 @@ py.plot({"data": fig}, output_type="div", show_link="False", include_plotlyjs="F
 </div>
 ​
 
-
-
-
-```python
-
-```
