@@ -22,7 +22,7 @@ comments: false
 
 ```python
 plt.figure(figsize=(12,6))
-plt.hist(df['SalePrice'])
+sns.histplot(df['SalePrice'])
 ```
 
 
