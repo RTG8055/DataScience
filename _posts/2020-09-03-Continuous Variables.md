@@ -26,16 +26,6 @@ plt.hist(df['SalePrice'])
 ```
 
 
-
-
-    (array([148., 723., 373., 135.,  51.,  19.,   4.,   3.,   2.,   2.]),
-     array([ 34900., 106910., 178920., 250930., 322940., 394950., 466960.,
-            538970., 610980., 682990., 755000.]),
-     <a list of 10 Patch objects>)
-
-
-
-
 ![png]({{site.baseurl}}/images/Histo.png)
 
 
@@ -48,14 +38,6 @@ plt.hist(df['SalePrice'])
 plt.figure(figsize=(15,8))
 sns.lineplot(data=df[:100]['SalePrice'])
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1910852fd30>
-
-
-
 
 ![png]({{site.baseurl}}/images/LinePlot.png)
 
@@ -73,14 +55,6 @@ plt.axhline(df[df['SaleCondition'] == 'Normal']['SalePrice'].mean(),\
 plt.legend()
 ```
 
-
-
-
-    <matplotlib.legend.Legend at 0x1910b632f40>
-
-
-
-
 ![png]({{site.baseurl}}/images/ViolinPlot.png)
 
 
@@ -93,19 +67,10 @@ These plots are useful for outlier detection.
  - Horizontal
 
 
-
 ```python
 plt.figure(figsize=(12,6))
 sns.boxplot(data=df, y='SaleCondition', x='SalePrice', orient='h')
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1910dcf7250>
-
-
-
 
 ![png]({{site.baseurl}}/images/BoxP_H.png)
 
@@ -119,17 +84,7 @@ sns.boxplot(data=df, x='SaleCondition', y='SalePrice', orient='v')
 ```
 
 
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1910dcf7070>
-
-
-
-
 ![png]({{site.baseurl}}/images/BoxP_V.png)
-
-
-
 
 
 <a id="RidgeLinePlot"></a>
@@ -164,13 +119,6 @@ from seaborn_qqplot import pplot
 ```python
 pplot(df.iloc[:250,:], x='YearBuilt', y='SalePrice', kind='qq', height=4, aspect=2)
 ```
-
-
-
-
-    <seaborn.axisgrid.PairGrid at 0x191132283d0>
-
-
 
 
 ![png]({{site.baseurl}}/images/QQPlot.png)
