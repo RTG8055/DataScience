@@ -50,8 +50,6 @@ sns.barplot(x='gender', y='count', data=df, palette='pastel', alpha=0.9)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a27b16a58>
-
 
 
 
