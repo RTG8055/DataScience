@@ -7,6 +7,11 @@ comments: false
 # Categorical Variables - Barcharts
 
 
+
+```python
+sns.set_style('darkgrid')
+```
+
 ## Faceted Bar Chart
 ##### seaborn
 
@@ -14,7 +19,7 @@ comments: false
 ```python
 g = sns.catplot(x="sex", y="count",
                 hue="survived", col="pclass",
-                data=df_cop, kind="bar",
+                data=df, kind="bar",
                 height=6, aspect=.7, palette="flare");
 ```
 
@@ -28,19 +33,22 @@ g = sns.catplot(x="sex", y="count",
 ```python
 df_copy2  = df['sex'].value_counts().reset_index()
 df_copy2.columns = ['gender', 'count']
+df = df_copy2
 ```
 
 ##### seaborn
 
 
 ```python
-sns.barplot(x='gender', y='count', data=df_copy2)
+plt.figure(figsize=(8,4))
+plt.title('Titanic Gender Distribution')
+
+sns.barplot(x='gender', y='count', data=df, palette='pastel', alpha=0.9)
+
 ```
 
 
 
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a29526cc0>
 
 
 
@@ -52,13 +60,12 @@ sns.barplot(x='gender', y='count', data=df_copy2)
 
 
 ```python
-plt.bar(x=df_copy2.gender, height=df_copy2['count'], color=['blue', 'red'])
+plt.title('Titanic Gender Distribution')
+plt.bar(x=df['gender'], height=df['count'], color=['blue', 'red'], alpha=0.4, width=0.4)
+plt.xlabel('Gender')
+plt.ylabel('Count')
 ```
 
-
-
-
-    <BarContainer object of 2 artists>
 
 
 
@@ -72,13 +79,11 @@ plt.bar(x=df_copy2.gender, height=df_copy2['count'], color=['blue', 'red'])
 
 ```python
 # Flip the x and y variables
-sns.barplot(x='count', y='gender', data=df_copy2)
+plt.figure(figsize=(8,4))
+plt.title('Titanic Gender Distribution')
+sns.barplot(x='count', y='gender', data=df, palette='pastel', alpha=0.5)
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a2599a7f0>
 
 
 
@@ -91,13 +96,11 @@ sns.barplot(x='count', y='gender', data=df_copy2)
 
 ```python
 # y and width are the passed params
-plt.barh(y=df_copy2.gender, width=df_copy2['count'], color=['blue', 'red'])
+plt.title('Titanic Gender Distribution')
+plt.barh(y=df['gender'], width=df['count'], color=['blue', 'red'], alpha=0.4)
+plt.xlabel('Gender')
+plt.ylabel('Count')
 ```
-
-
-
-
-    <BarContainer object of 2 artists>
 
 
 
@@ -112,18 +115,20 @@ plt.barh(y=df_copy2.gender, width=df_copy2['count'], color=['blue', 'red'])
 
 ```python
 # notice the order parameter
-sns.barplot(x='gender', y='count', data=df_copy2, order=['female', 'male'])
+plt.figure(figsize=(8,4))
+plt.title('Titanic Gender Distribution')
+
+sns.barplot(x='gender', y='count', data=df, palette='pastel', alpha=0.9, order=['male', 'female'])
+
 ```
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a246b2da0>
 
 
 
-
-![png]({{ site.baseurl}}/images/seaborn_reorder_bar.png)
+![png]({{ site.baseurl}}/images/seaborn_reordering.png)
 
 
 ##### matplotlib
