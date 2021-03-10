@@ -1,7 +1,7 @@
 # Jekyll configuration
 
 name: EDAV Community Project
-description: Contains Python code snippets for plotting different types of graphs
+description: Contains Python code snippets for plotting different types of graphs.
 
 # url is currently only used only for the RSS feed in feed.xml
 url: https://rtg8055.github.io/DataScience/
