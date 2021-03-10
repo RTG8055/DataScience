@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Categorical Variables - Mosaic Plots"
+date: 2021-04-01 21:20:06 -0700
+comments: false
+---
+
+
 ## Mosaic Plots
 
 ```python

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Categorical Variables - Binplots"
-date: 2021-03-08 21:20:06 -0700
+title: "Categorical Variables - Heatmaps"
+date: 2021-05-01 21:20:06 -0700
 comments: false
 ---
 

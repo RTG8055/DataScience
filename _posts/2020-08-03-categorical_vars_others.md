@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Categorical Variables - Others"
-date: 2021-03-08 21:20:06 -0700
+date: 2021-03-01 21:20:06 -0700
 comments: false
 ---
 

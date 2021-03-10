@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sample EDA"
-date: 2021-03-09 17:45:06
+date: 2019-03-09 17:45:06
 comments: false
 ---
 
