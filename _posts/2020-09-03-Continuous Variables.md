@@ -22,11 +22,11 @@ comments: false
 
 ```python
 plt.figure(figsize=(12,6))
-plt.hist(df['SalePrice'])
+sns.histplot(df['SalePrice'])
 ```
 
 
-![png]({{site.baseurl}}/images/Histo.png)
+![png]({{site.baseurl}}/images/Histo2.png)
 
 
 <a id='LinePlot'></a>
@@ -39,7 +39,7 @@ plt.figure(figsize=(15,8))
 sns.lineplot(data=df[:100]['SalePrice'])
 ```
 
-![png]({{site.baseurl}}/images/LinePlot.png)
+![png]({{site.baseurl}}/images/LinePlot2.png)
 
 
 <a id="ViolinPlot"></a>
@@ -55,7 +55,7 @@ plt.axhline(df[df['SaleCondition'] == 'Normal']['SalePrice'].mean(),\
 plt.legend()
 ```
 
-![png]({{site.baseurl}}/images/ViolinPlot.png)
+![png]({{site.baseurl}}/images/ViolinPlot2.png)
 
 
 <a id="BoxPlot"></a>
@@ -72,7 +72,7 @@ plt.figure(figsize=(12,6))
 sns.boxplot(data=df, y='SaleCondition', x='SalePrice', orient='h')
 ```
 
-![png]({{site.baseurl}}/images/BoxP_H.png)
+![png]({{site.baseurl}}/images/BoxP_H2.png)
 
 
 - Vertical
@@ -84,7 +84,7 @@ sns.boxplot(data=df, x='SaleCondition', y='SalePrice', orient='v')
 ```
 
 
-![png]({{site.baseurl}}/images/BoxP_V.png)
+![png]({{site.baseurl}}/images/BoxP_V2.png)
 
 
 <a id="RidgeLinePlot"></a>
@@ -100,7 +100,7 @@ ridge_plot.fig.subplots_adjust(hspace=0.35)
 ```
 
 
-![png]({{site.baseurl}}/images/RidgeLinePlot.png)
+![png]({{site.baseurl}}/images/RidgeLinePlot2.png)
 
 
 
@@ -121,6 +121,6 @@ pplot(df.iloc[:250,:], x='YearBuilt', y='SalePrice', kind='qq', height=4, aspect
 ```
 
 
-![png]({{site.baseurl}}/images/QQPlot.png)
+![png]({{site.baseurl}}/images/QQPlot2.png)
 
 
