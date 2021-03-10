@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Categorical Variables - Barcharts"
-date: 2021-03-08 21:20:06 -0700
+date: 2021-03-08 18:57:06
 comments: false
 ---
 # Categorical Variables - Barcharts

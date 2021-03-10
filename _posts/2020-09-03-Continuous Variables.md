@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Continuous Variables"
-date: 2021-03-09 18:44:06
+date: 2021-03-09 18:58:06
 comments: false
 ---
 
