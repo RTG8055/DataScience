@@ -19,7 +19,7 @@ sns.set_style('darkgrid')
 ```python
 g = sns.catplot(x="sex", y="count",
                 hue="survived", col="pclass",
-                data=df_cop, kind="bar",
+                data=df, kind="bar",
                 height=6, aspect=.7, palette="flare");
 ```
 
@@ -71,10 +71,6 @@ plt.ylabel('Count')
 
 
 
-    Text(0, 0.5, 'Count')
-
-
-
 
 ![png]({{ site.baseurl}}/images/matplotlib_basic.png)
 
@@ -90,10 +86,6 @@ plt.title('Titanic Gender Distribution')
 sns.barplot(x='count', y='gender', data=df, palette='pastel', alpha=0.5)
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a288852e8>
 
 
 
@@ -139,8 +131,6 @@ sns.barplot(x='gender', y='count', data=df, palette='pastel', alpha=0.9, order=[
 
 
 
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a27b5b518>
 
 
 

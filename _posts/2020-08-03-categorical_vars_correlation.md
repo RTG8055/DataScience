@@ -25,10 +25,6 @@ plt.title('Heatmap for categorical variables in Titanic Dataset', size=15)
 
 
 
-    Text(0.5, 1, 'Heatmap for categorical variables in Titanic Dataset')
-
-
-
 
 ![png]({{ site.baseurl}}/images/correlation_plot.png)
 
@@ -49,10 +45,6 @@ plt.title('Heatmap for categorical variables in Titanic Dataset - Partial Matrix
 
 
 
-    Text(0.5, 1, 'Heatmap for categorical variables in Titanic Dataset - Partial Matrix')
-
-
-
 
 ![png]({{ site.baseurl}}/images/correlation_lower.png)
 
@@ -67,7 +59,6 @@ for col in survived_columns:
     if(len(val.index)>100):
         print("Too many Categories in "+col)
         continue
-    #plt.figure(figsize=(7,7))
     sns.barplot(x=val.index,y=val.values,label=True, alpha=0.8)
     plt.title(col)
     plt.ylabel('Count')
