@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Multivariate Continuous"
-date: 2021-03-09 21:20:06 -0700
+date: 2021-03-09 18:20:06
 comments: false
 ---
 # <a id='0'>Content</a>
