@@ -28,9 +28,6 @@ ax.set_ylabel('Fare')
 
 
 
-    Text(0, 0.5, 'Fare')
-
-
 
 
 ![png]({{ site.baseurl}}/images/matplotlib_hexplot.png)
@@ -48,7 +45,6 @@ print(ax)
 plt.show()
 ```
 
-    <seaborn.axisgrid.JointGrid object at 0x1a1bbe8a20>
 
 
 
