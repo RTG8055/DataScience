@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 ```
 
-Data Source: <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data?select=train.csv"></a>
+Data Source: <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data?select=train.csv">https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data?select=train.csv</a>
 
 
 ```python
@@ -795,9 +795,6 @@ sns.heatmap(df[numerical_cols].corr(), annot=False, cmap='coolwarm', fmt='.1f')
 ```
 
 
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x191101481f0>
 
 
 
