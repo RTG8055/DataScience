@@ -13,7 +13,6 @@
   ```
 </details>
 
-
 <details>
   <summary>type conversion</summary>
   
@@ -65,14 +64,18 @@
 <details>
   <summary>Dummy / One-Hot Encoding</summary>
     
-    ```categorical_columns2 = ['X_1', 'X_2', 'X_3', 'X_4', 'X_5', 'X_6', 'X_7', 'X_8', 'X_9', 'X_10', 'X_13',
-    'X_14', 'X_15', 'day_of_week']
-    df_total_dummy = pd.get_dummies(df_total,columns=categorical_columns2)
-    ce_bin2=ce.BinaryEncoder(cols=['X_11'])
-    df_total_dummy = ce_bin2.fit_transform(df_total_dummy)
-        
-    #one hot encoding for categorical variables
-    data_new = pd.get_dummies(data=data_new,columns=obj_dtypes)
+    ```
+    def create_one_hot_columns(df, one_hot_cols, extra_cols):
+      from sklearn.preprocessing import OneHotEncoder
+      
+      enc = OneHotEncoder(sparse_output=False)
+      enc.fit(df[one_hot_cols])
+      
+      df_one_hot = enc.transform(df[one_hot_cols])
+      
+      df_encoded = pd.concat([df[extra_cols], pd.DataFrame(df_one_hot, columns=enc.get_feature_names_out())],axis=1)
+      
+      return df_encoded
     ```
 </details>
 
@@ -155,26 +158,28 @@
 <details>
   <summary>Up Sampling</summary>
     
-    ```from sklearn.utils import resample
-
-    #separating majority and minority classes
-    df_majority_binary = train_binary[train_binary[target] == 1]
-    df_minority_binary = train_binary[train_binary[target] == 0]
-
-    df_minority_binary_upsampled = resample(df_minority_binary,
-                                       replace=True,
-                                       n_samples=22788,
-                                       random_state=66)
-
-    df_upsampled_binary = pd.concat([df_majority_binary,df_minority_binary_upsampled],axis=0)
-
-    #splitting dependent and independent variables
-
-    df_upsampled_binary_X = df_upsampled_binary[train_cols_binary]
-    df_upsampled_binary_Y = df_upsampled_binary[[target]]
-
-    print(df_upsampled_binary_X.shape)
-    print(df_upsampled_binary_Y.shape)
+    ```
+    def up_sample_df(df, target,majority_cat = 'Discharge'):
+      from sklearn.utils import resample
+      
+      all_categories = df[target].unique()
+      #separating majority and minority classes
+      df_majority_binary = df[df[target] == majority_cat]
+      df_upsampled = df_majority_binary
+      for minority_cat in all_categories:
+          if minority_cat == majority_cat:
+              continue
+          
+          df_minority_binary = df[df[target] == minority_cat]
+  
+          df_minority_binary_upsampled = resample(df_minority_binary,
+                                             replace=True,
+                                             n_samples=df_majority_binary.shape[0],
+                                             random_state=66)
+  
+          df_upsampled = pd.concat([df_upsampled,df_minority_binary_upsampled],axis=0,ignore_index=True)
+      
+      return df_upsampled
     ```
 </details>
 
