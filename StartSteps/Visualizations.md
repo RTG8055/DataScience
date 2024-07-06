@@ -128,6 +128,77 @@ https://wellsr.com/python/seaborn-barplot-tutorial-for-python/#:~:text=If%20you%
 	plt.subplots_adjust(wspace = 1.6)
 
 
+#### Alluvial plots
+```
+def get_sanky_frame(df, categories, do_not_plot=[], color_dict={}):
+    newDf = pd.DataFrame()
+    for cat_col in categories:
+        df[cat_col] = df[cat_col].map(str)
+    
+    cols = ['count']
+    if color_dict != {}:
+        for col in do_not_plot:
+            df['color'] = df[col].map(lambda x: x if color_dict.get(x) is None else color_dict.get(x))
+        cols.append('color')
+    
+    for i in range(len(categories)-1):
+        if categories[i] in do_not_plot or categories[i+1] in do_not_plot:
+            continue
+        tempDf = df[[categories[i],categories[i+1]]+cols]
+        tempDf.columns = ['source','target']+cols
+        newDf = pd.concat([newDf,tempDf])
+        if do_not_plot == [] and len(categories)>2:
+            newDf = newDf.groupby(['source','target']).agg({'count':'sum'}).reset_index()
+    newDf['source'] = newDf['source'].map(str)
+
+    label_list = list(np.unique(df[categories].values))
+    source = newDf['source'].apply(lambda x: label_list.index(x))
+    target = newDf['target'].apply(lambda x: label_list.index(x))
+    count = newDf['count']
+    if color_dict != {}:
+        link_color = newDf['color']
+    else:
+        link_color = []
+    return label_list, source, target,count, link_color
+```
+
+```
+def generate_parallel_plot(df_temp, categories, do_not_plot=[], link_dict = {}, title=""):
+    df_v = df_temp[categories].value_counts().reset_index().rename(columns={0:'count'}).copy(deep=True)
+    l,s,t,c,color_link = get_sanky_frame(df_v, categories, do_not_plot, link_dict)
+    link_values = {"source": s, "target": t, "value": c,"hovertemplate": "Source: %{source.label} <br /> Target: %{target.label} <br /> Count: %{value}"}
+    if len(color_link) != 0:
+        link_values["color"]= color_link
+    fig = go.Figure(data=[go.Sankey(
+        node = {"label": l, "pad":5, "thickness":5, "hovertemplate": "%{label} count: %{value}"},
+        link = link_values
+        )])
+    fig.update_layout(title_text=title,
+                  font_size=10, legend_title='Colors')
+    display(fig)
+```
+
+```
+categories = ['Hole Finish Value','prev_Result', 'Result']
+plot_categories = ['prev_Result', 'Result']
+df_v = df_r_h[categories].value_counts().reset_index().rename(columns={0:'count'}).copy(deep=True)
+
+link_values = list(np.unique(df_v[['Hole Finish Value']].values))
+print(link_values)
+link_colors = ['#FEF3C7', '#A6E3D7', '#CBB4D5', '#721506', '#EBBAB5','black' ]
+link_names = ['blue','green','purple','red','pink','black']
+link_dict = {}
+for v,c in zip(link_values, link_colors):
+    link_dict[v]= c
+print(link_dict)
+
+pd.DataFrame([link_dict.keys(), link_names, link_dict.values()])
+
+df_r_h = new_df[(new_df['Round'] == 3) & (new_df['Hole'] == 1) & (new_df['Year'] == 2020)]
+generate_parallel_plot(df_r_h, ['Hole Finish Value','prev_Result', 'Result'], ['Hole Finish Value'], link_dict, "Round 3, Hole 1, Year 2020")
+```
+
+
 
 
 #### boolean columns graphs category wise
